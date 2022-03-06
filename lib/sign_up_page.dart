@@ -13,6 +13,24 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  submitForm() {
+    bool isValid = formKey.currentState!.validate();
+    if (isValid) {
+      print(_emailController.text);
+      print(_passwordController.text);
+      print(_userNameController.text);
+    }
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _emailController.dispose();
+    _passwordController.dispose();
+    _userNameController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +62,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             hintText: 'abc@mail.com',
                             prefixIcon: Icon(Icons.mail)),
                         validator: (value) {
-                          if (value!.isEmpty && !value.contains('@')) {
+                          if (value!.isEmpty || !value.contains('@')) {
                             return 'Please enter valid email address';
                           }
                         },
@@ -63,16 +81,23 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       TextFormField(
                         controller: _passwordController,
+                        obscureText: true,
                         decoration: const InputDecoration(
                             label: Text('Password'),
-                            prefixIcon: Icon(Icons.mail)),
+                            prefixIcon: Icon(Icons.key)),
                         validator: (value) {
                           if (value!.length < 6) {
                             return 'Password should be at least 6 characters';
                           }
                         },
                       ),
-                      SizedBox(height: 10,)
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      MaterialButton(
+                        onPressed: submitForm,
+                        child: const Text("Submit"),
+                      )
                     ],
                   ),
                 ),

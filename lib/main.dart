@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'bottom_nav_page.dart';
 import 'sign_up_page.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 170, 242, 255),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pinkAccent),
       ),
-      home: SignUpPage()
+      home: BottomNavigationPage()
     );
   }
 }
